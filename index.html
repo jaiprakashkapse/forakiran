@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kiran 🌸</title>
+
+<style>
+html, body {
+    height: 100%;
+}
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+
+    background: url('https://images.unsplash.com/photo-1490750967868-88aa4486c946') no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+
+    min-height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.55);
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+.container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    width: 92%;
+    max-width: 450px;
+    padding: 30px;
+    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    z-index: 2;
+    box-sizing: border-box;
+    animation: fadeInCard 1s ease forwards;
+}
+
+@keyframes fadeInCard {
+    0% { opacity: 0; transform: translate(-50%, -60%) scale(0.8); }
+    100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+h1 {
+    font-size: 1.8rem;
+    color: #fff;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+    line-height: 1.4;
+    animation: textFade 1.5s ease;
+}
+
+p {
+    font-size: 1.15rem;
+    color: #fff;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+    line-height: 1.5;
+    animation: textFade 1.5s ease;
+}
+
+@keyframes textFade {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+button {
+    padding: 12px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-main {
+    background: linear-gradient(45deg, #ff4d6d, #ff758c);
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 5px 20px rgba(255, 77, 109, 0.6);
+    animation: pulse 1.8s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+    100% { transform: scale(1); }
+}
+
+.yes-btn { background: #28a745; color: white; }
+
+.no-btn {
+    background: #ff1744;
+    color: white;
+    position: fixed;
+    z-index: 999;
+}
+
+.hidden { display: none; }
+
+.flower-img, .main-img {
+    width: 220px;
+    max-width: 80%;
+    border-radius: 15px;
+    margin: 15px auto;
+    display: block;
+    animation: pop 1.5s ease;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+}
+
+@keyframes pop {
+    0% { transform: scale(0); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.heart {
+    position: fixed;
+    color: rgba(255,255,255,0.7);
+    animation: float 6s infinite;
+    z-index: 1;
+    pointer-events: none;
+}
+
+@keyframes float {
+    0% { transform: translateY(0); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateY(-800px); opacity: 0; }
+}
+
+/* Music control */
+.music-toggle {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 50;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(8px);
+    color: #fff;
+    font-size: 20px;
+    border: 1px solid rgba(255,255,255,0.4);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.music-toggle.spin { animation: spin 3s linear infinite; }
+@keyframes spin { from { transform: rotate(0deg);} to { transform: rotate(360deg);} }
+
+.pop-word {
+    display: inline-block;
+    animation: wiggle 2.2s ease-in-out infinite;
+}
+@keyframes wiggle {
+    0%, 100% { transform: rotate(0deg) scale(1); }
+    25% { transform: rotate(-4deg) scale(1.05); }
+    75% { transform: rotate(4deg) scale(1.05); }
+}
+
+.reasons {
+    text-align: left;
+    font-size: 1rem;
+    margin: 15px 0;
+    padding-left: 5px;
+}
+.reasons div {
+    margin: 8px 0;
+    color: #fff;
+    text-shadow: 1px 1px 6px rgba(0,0,0,0.8);
+}
+
+.note {
+    font-size: 0.8rem;
+    opacity: 0.85;
+    color: #fff;
+    margin-top: 12px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Background music: drop a file named song.mp3 next to this HTML file -->
+<audio id="bgMusic" loop>
+    <source src="song.mp3" type="audio/mpeg">
+</audio>
+<button class="music-toggle" id="musicBtn" title="Play music">🎵</button>
+
+<script>
+for (let i = 0; i < 20; i++) {
+    let heart = document.createElement("div");
+    heart.innerHTML = "❤";
+    heart.className = "heart";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (Math.random()*3 + 3) + "s";
+    heart.style.fontSize = (Math.random()*20 + 15) + "px";
+    document.body.appendChild(heart);
+}
+
+const music = document.getElementById("bgMusic");
+const musicBtn = document.getElementById("musicBtn");
+let playing = false;
+musicBtn.addEventListener("click", () => {
+    if (!playing) {
+        music.play().catch(() => {
+            alert("Add a 'song.mp3' file in the same folder as this page to hear the music 🎶");
+        });
+        musicBtn.textContent = "⏸";
+        musicBtn.classList.add("spin");
+        playing = true;
+    } else {
+        music.pause();
+        musicBtn.textContent = "🎵";
+        musicBtn.classList.remove("spin");
+        playing = false;
+    }
+});
+</script>
+
+<!-- PAGE 1: Opening -->
+<div class="container" id="page1">
+    <div class="content">
+        <h1>Hey Kiran 💖,<br>I made you something 🌸</h1>
+        <p>Come see it 😏</p>
+        <button class="btn-main" onclick="goTo('page1','page2')">Tap Here 💌</button>
+    </div>
+</div>
+
+<!-- PAGE 2: Confident, upbeat opener -->
+<div class="container hidden" id="page2">
+    <h1><span class="pop-word">You're the best</span> ✨</h1>
+    <p>No long speech, no drama, just wanted to remind you how amazing you are,
+    because I don't say it enough.</p>
+    <button class="btn-main" onclick="goTo('page2','page3')">Next ➡</button>
+</div>
+
+<!-- PAGE 3: Reasons why she's special -->
+<div class="container hidden" id="page3">
+    <h1>Reasons you're special 💕</h1>
+    <div class="reasons">
+        <div>🌸 Your smile</div>
+        <div>👁️👁️ Your eyes</div>
+        <div>👃Your nose</div>
+        <div>☕ You bring the best energy to every moment</div>
+        <div>😄 Your vibe is honestly unmatched</div>
+        <div>🤣 Your expression</div>
+    </div>
+    <button class="btn-main" onclick="goTo('page3','page4')">Next ➡</button>
+</div>
+
+<!-- PAGE 4: Flower / Kiran -->
+<div class="container hidden" id="page4">
+    <img class="main-img" src="mainphoto.png" alt="Kiran">
+    <h1>Kiran ✨</h1>
+    <p>The one who lights things up wherever she walks in.</p>
+    <button class="btn-main" onclick="goTo('page4','page5')">Next ➡</button>
+</div>
+
+<!-- PAGE 5: Coffee invite, confident tone -->
+<div class="container hidden" id="page5">
+    <h1>Coffee date? ☕😎</h1>
+    <button class="yes-btn" onclick="goTo('page5','page6')">Yes 😍</button>
+    <button class="no-btn" id="noBtn">Nhi 😜</button>
+    <p>ab "nhi" bolke dikha</p>
+</div>
+
+<!-- PAGE 6: Final -->
+<div class="container hidden" id="page6">
+    <h1>That's what I like to hear ❤️<br><br>Can't wait for that coffee☕😎</h1>
+    <p>If you're ready, send me the date 📅 or just ignore this, like you've been doing lately</p>
+</div>
+
+<script>
+function goTo(hideId, showId) {
+    document.getElementById(hideId).classList.add("hidden");
+    document.getElementById(showId).classList.remove("hidden");
+}
+
+const noBtn = document.getElementById("noBtn");
+let step = 0;
+
+function moveButton() {
+    const moveDistance = 80;
+    let currentX = noBtn.offsetLeft;
+    let currentY = noBtn.offsetTop;
+
+    const maxX = window.innerWidth - noBtn.offsetWidth - 10;
+    const maxY = window.innerHeight - noBtn.offsetHeight - 10;
+
+    if (step === 0) currentX = Math.min(currentX + moveDistance, maxX);
+    else if (step === 1) currentY = Math.min(currentY + moveDistance, maxY);
+    else if (step === 2) currentX = Math.max(currentX - moveDistance, 0);
+    else if (step === 3) currentY = Math.max(currentY - moveDistance, 0);
+
+    noBtn.style.left = currentX + "px";
+    noBtn.style.top = currentY + "px";
+    step = (step + 1) % 4;
+}
+
+noBtn.addEventListener("mouseover", moveButton);
+noBtn.addEventListener("touchstart", moveButton);
+</script>
+
+</body>
+</html>
